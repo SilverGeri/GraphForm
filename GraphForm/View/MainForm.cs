@@ -17,8 +17,11 @@ namespace GraphForm.View
         private Point _clickPosition;
         private Dictionary<string, TableForm> tables;
 
+        private int debug;
+
         public MainForm()
         {
+            debug = 0;
             InitializeComponent();
             newUndirected.Click += NewGraph;
             newDirected.Click += NewGraph;
@@ -27,6 +30,9 @@ namespace GraphForm.View
             nodes = new List<NodeView>();
             edges = new Dictionary<int, Edge>();
             newUndirected.PerformClick();
+            StartBtn.Click += StartBtnClick;
+            NextBtn.Click += NextBtnClick;
+            FinishBtn.Click += FinishBtnClick;
             Dictionary<int, string> algorythmDictionary = new Dictionary<int, string>
             {
                 {0, "Válassz egy algoritmust"},
@@ -48,10 +54,20 @@ namespace GraphForm.View
 
         private void NewGraph(object sender, EventArgs e)
         {
+            foreach (var table in tables)
+            {
+                table.Value.Dispose();
+            }
+            tables.Clear();
+
             if (sender == newUndirected)
+            {
                 _model = new GraphModel(false);
+            }
             else if (sender == newDirected)
+            {
                 _model = new GraphModel(true);
+            }
             _model.AddNodeEvent += addNodeHandler;
             _model.AddEdgeEvent += addEdgeHandler;
             _model.NotifyEvent += notifyEventHandler;
@@ -59,9 +75,6 @@ namespace GraphForm.View
             _model.NodeStateChangeEvent += NodeStateChanged;
             _model.EdgeStateChangeEvent += EdgeStateChanged;
             _model.StartNodeChanged += startNodeChanged;
-            StartBtn.Click += StartBtnClick;
-            NextBtn.Click += NextBtnClick;
-            FinishBtn.Click += FinishBtnClick;
             
             foreach (NodeView node in nodes)
             {
@@ -84,6 +97,8 @@ namespace GraphForm.View
 
         private void NextBtnClick(object sender, EventArgs e)
         {
+            Console.WriteLine(debug);
+            ++debug;
             _model.Next();
         }
 
