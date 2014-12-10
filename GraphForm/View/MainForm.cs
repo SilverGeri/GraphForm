@@ -24,8 +24,6 @@ namespace GraphForm.View
             InitializeComponent();
             newUndirected.Click += NewGraph;
             newDirected.Click += NewGraph;
-            SaveMenuItem.Click += SaveToFile;
-            LoadMenuItem.Click += LoadFromFile;
             addButton.Click += addNode;
             linebtn.Click += NewEdge;
             nodes = new List<NodeView>();
@@ -303,70 +301,6 @@ namespace GraphForm.View
             _isDragging = false;
             draggable.Capture = false;
             Refresh();
-        }
-
-        private void SaveToFile(object sender, EventArgs e)
-        {
-            var dialog = new SaveFileDialog();
-            if (DialogResult.OK != dialog.ShowDialog())
-            {
-                return;
-            }
-
-            _model.SetDefault();
-            var toSave = new SaveHelper();
-            toSave.Model = _model;
-            /*toSave.Edges = edges;
-            toSave.Nodes = nodes;*/
-
-            Stream outStream = null;
-            try
-            {
-                outStream = new FileStream(dialog.FileName, FileMode.Create);
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(outStream, _model);
-            }
-            catch (Exception exc)
-            {
-                var messageBox = new MessageForm("Hiba", "A fájl mentése közben hiba lépett fel!");
-                messageBox.ShowDialog(this);
-            }
-            finally
-            {
-                if (outStream != null)
-                    outStream.Close();
-            }
-        }
-
-        private void LoadFromFile(object sender, EventArgs e)
-        {
-            var dialog = new OpenFileDialog();
-            if (DialogResult.OK != dialog.ShowDialog())
-                return;
-
-            Stream inStream = null;
-            SaveHelper helper = null;
-            try
-            {
-                inStream = new FileStream(dialog.FileName, FileMode.Open);
-                BinaryFormatter formatter = new BinaryFormatter();
-                helper = (SaveHelper)formatter.Deserialize(inStream);
-                _model = helper.Model;
-                edges = helper.Edges;
-                nodes = helper.Nodes;
-
-                Refresh();
-            }
-            catch (Exception)
-            {
-                var messageBox = new MessageForm("Hiba", "A fájl betöltése közben hiba lépett fel!");
-                messageBox.ShowDialog(this);
-            }
-            finally
-            {
-                if (inStream != null)
-                    inStream.Close();
-            } 
         }
     }
 }

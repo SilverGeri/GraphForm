@@ -33,7 +33,8 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.újGráfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGraphItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newUndirected = new System.Windows.Forms.ToolStripMenuItem();
+            this.newDirected = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.linebtn = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -47,9 +48,6 @@
             this.StartBtn = new System.Windows.Forms.Button();
             this.NextBtn = new System.Windows.Forms.Button();
             this.FinishBtn = new System.Windows.Forms.Button();
-            this.newUndirected = new System.Windows.Forms.ToolStripMenuItem();
-            this.newDirected = new System.Windows.Forms.ToolStripMenuItem();
-            this.LoadMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SpeedBar = new System.Windows.Forms.TrackBar();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -78,9 +76,7 @@
             // újGráfToolStripMenuItem
             // 
             this.újGráfToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGraphItem,
-            this.SaveMenuItem,
-            this.LoadMenuItem});
+            this.newGraphItem});
             this.újGráfToolStripMenuItem.Name = "újGráfToolStripMenuItem";
             this.újGráfToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.újGráfToolStripMenuItem.Text = "Fájl";
@@ -94,11 +90,17 @@
             this.newGraphItem.Size = new System.Drawing.Size(152, 22);
             this.newGraphItem.Text = "Új gráf";
             // 
-            // SaveMenuItem
+            // newUndirected
             // 
-            this.SaveMenuItem.Name = "SaveMenuItem";
-            this.SaveMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.SaveMenuItem.Text = "Mentés";
+            this.newUndirected.Name = "newUndirected";
+            this.newUndirected.Size = new System.Drawing.Size(152, 22);
+            this.newUndirected.Text = "Irányítatlan";
+            // 
+            // newDirected
+            // 
+            this.newDirected.Name = "newDirected";
+            this.newDirected.Size = new System.Drawing.Size(152, 22);
+            this.newDirected.Text = "Irányított";
             // 
             // linebtn
             // 
@@ -192,24 +194,6 @@
             this.FinishBtn.Text = "Végeredmény";
             this.FinishBtn.UseVisualStyleBackColor = true;
             // 
-            // newUndirected
-            // 
-            this.newUndirected.Name = "newUndirected";
-            this.newUndirected.Size = new System.Drawing.Size(152, 22);
-            this.newUndirected.Text = "Irányítatlan";
-            // 
-            // newDirected
-            // 
-            this.newDirected.Name = "newDirected";
-            this.newDirected.Size = new System.Drawing.Size(152, 22);
-            this.newDirected.Text = "Irányított";
-            // 
-            // LoadMenuItem
-            // 
-            this.LoadMenuItem.Name = "LoadMenuItem";
-            this.LoadMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.LoadMenuItem.Text = "Betöltés";
-            // 
             // SpeedBar
             // 
             this.SpeedBar.Location = new System.Drawing.Point(1011, 2);
@@ -254,7 +238,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem újGráfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newGraphItem;
-        private System.Windows.Forms.ToolStripMenuItem SaveMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button linebtn;
         private System.Windows.Forms.BindingSource bindingSource1;
@@ -270,7 +253,6 @@
         private System.Windows.Forms.Button FinishBtn;
         private System.Windows.Forms.ToolStripMenuItem newUndirected;
         private System.Windows.Forms.ToolStripMenuItem newDirected;
-        private System.Windows.Forms.ToolStripMenuItem LoadMenuItem;
         private System.Windows.Forms.TrackBar SpeedBar;
     }
 }
