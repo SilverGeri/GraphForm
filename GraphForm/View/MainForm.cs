@@ -17,11 +17,8 @@ namespace GraphForm.View
         private Point _clickPosition;
         private Dictionary<string, TableForm> tables;
 
-        private int debug;
-
         public MainForm()
         {
-            debug = 0;
             InitializeComponent();
             newUndirected.Click += NewGraph;
             newDirected.Click += NewGraph;
@@ -97,8 +94,6 @@ namespace GraphForm.View
 
         private void NextBtnClick(object sender, EventArgs e)
         {
-            Console.WriteLine(debug);
-            ++debug;
             _model.Next();
         }
 
