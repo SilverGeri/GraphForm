@@ -20,6 +20,7 @@ namespace GraphForm.View
         public MainForm()
         {
             InitializeComponent();
+            SpeedBar.Value = 1000;
             newUndirected.Click += NewGraph;
             newDirected.Click += NewGraph;
             addButton.Click += addNode;
@@ -110,7 +111,7 @@ namespace GraphForm.View
                 table = tables[e.Id];
                 table.ChangeDataSource(e.Table);
             }
-            catch (KeyNotFoundException exc)
+            catch (KeyNotFoundException)
             {
                 table = new TableForm(e.Id, e.Caption, e.Table);
                 table.Show();
