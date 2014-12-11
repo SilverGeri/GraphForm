@@ -26,7 +26,6 @@ namespace GraphForm.View
             linebtn.Click += NewEdge;
             nodes = new List<NodeView>();
             edges = new Dictionary<int, Edge>();
-            newUndirected.PerformClick();
             StartBtn.Click += StartBtnClick;
             NextBtn.Click += NextBtnClick;
             FinishBtn.Click += FinishBtnClick;
@@ -47,6 +46,7 @@ namespace GraphForm.View
 
             tables = new Dictionary<string, TableForm>();
             TopMost = false;
+            newUndirected.PerformClick();
         }
 
         private void NewGraph(object sender, EventArgs e)
