@@ -183,6 +183,12 @@ namespace GraphForm.Model
                     }
                     break;
                 case 4:
+                    if (IsDirected)
+                    {
+                        if (NotifyEvent != null)
+                            NotifyEvent(this, new MessageEventArgs("Az algoritmus irányítatlan gráfok minimális feszítőfájának megkeresésére szolgál", "Hiba"));
+                        break;
+                    }
                     algorythm = new Kruskal(ref graphList);
                     break;
                 case 5:
