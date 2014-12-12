@@ -14,9 +14,9 @@ namespace GraphForm.View
         private GraphModel _model;
         private List<NodeView> nodes;
         private Dictionary<int, Edge> edges;
+        private Dictionary<string, TableForm> tables;
         private bool _isDragging;
         private Point _clickPosition;
-        private Dictionary<string, TableForm> tables;
 
         public MainForm()
         {
