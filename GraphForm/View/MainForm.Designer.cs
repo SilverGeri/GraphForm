@@ -31,10 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.addButton = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.újGráfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGraphItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newUndirected = new System.Windows.Forms.ToolStripMenuItem();
             this.newDirected = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoadMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.linebtn = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -49,8 +51,6 @@
             this.NextBtn = new System.Windows.Forms.Button();
             this.FinishBtn = new System.Windows.Forms.Button();
             this.SpeedBar = new System.Windows.Forms.TrackBar();
-            this.SaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LoadMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
@@ -68,22 +68,22 @@
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.újGráfToolStripMenuItem});
+            this.FileMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(1218, 24);
             this.menuStrip2.TabIndex = 2;
             this.menuStrip2.Text = "menuStrip2";
             // 
-            // újGráfToolStripMenuItem
+            // FileMenuItem
             // 
-            this.újGráfToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGraphItem,
             this.SaveMenuItem,
             this.LoadMenuItem});
-            this.újGráfToolStripMenuItem.Name = "újGráfToolStripMenuItem";
-            this.újGráfToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.újGráfToolStripMenuItem.Text = "Fájl";
+            this.FileMenuItem.Name = "FileMenuItem";
+            this.FileMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.FileMenuItem.Text = "Fájl";
             // 
             // newGraphItem
             // 
@@ -97,14 +97,26 @@
             // newUndirected
             // 
             this.newUndirected.Name = "newUndirected";
-            this.newUndirected.Size = new System.Drawing.Size(133, 22);
+            this.newUndirected.Size = new System.Drawing.Size(152, 22);
             this.newUndirected.Text = "Irányítatlan";
             // 
             // newDirected
             // 
             this.newDirected.Name = "newDirected";
-            this.newDirected.Size = new System.Drawing.Size(133, 22);
+            this.newDirected.Size = new System.Drawing.Size(152, 22);
             this.newDirected.Text = "Irányított";
+            // 
+            // SaveMenuItem
+            // 
+            this.SaveMenuItem.Name = "SaveMenuItem";
+            this.SaveMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.SaveMenuItem.Text = "Mentés";
+            // 
+            // LoadMenuItem
+            // 
+            this.LoadMenuItem.Name = "LoadMenuItem";
+            this.LoadMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.LoadMenuItem.Text = "Betöltés";
             // 
             // linebtn
             // 
@@ -206,18 +218,6 @@
             this.SpeedBar.Size = new System.Drawing.Size(104, 45);
             this.SpeedBar.TabIndex = 14;
             // 
-            // SaveMenuItem
-            // 
-            this.SaveMenuItem.Name = "SaveMenuItem";
-            this.SaveMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.SaveMenuItem.Text = "Mentés";
-            // 
-            // LoadMenuItem
-            // 
-            this.LoadMenuItem.Name = "LoadMenuItem";
-            this.LoadMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.LoadMenuItem.Text = "Betöltés";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,7 +252,7 @@
 
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem újGráfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newGraphItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button linebtn;
