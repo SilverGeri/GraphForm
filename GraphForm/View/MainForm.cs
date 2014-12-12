@@ -322,30 +322,38 @@ namespace GraphForm.View
             dialog.DefaultExt = "txt";
             dialog.ShowDialog();
 
-            XmlWriter writer = XmlWriter.Create(dialog.FileName);
-            writer.WriteStartDocument();
-            writer.WriteStartElement("graph");
-            writer.WriteAttributeString("directed", _model.IsDirected ? "true" : "false");
-            writer.WriteStartElement("nodes");
-            foreach (var node in nodes)
+            try
             {
-                writer.WriteStartElement("node");
-                writer.WriteAttributeString("x", node.Location.X.ToString());
-                writer.WriteAttributeString("y", node.Location.Y.ToString());
+                XmlWriter writer = XmlWriter.Create(dialog.FileName);
+                writer.WriteStartDocument();
+                writer.WriteStartElement("graph");
+                writer.WriteAttributeString("directed", _model.IsDirected ? "true" : "false");
+                writer.WriteStartElement("nodes");
+                foreach (var node in nodes)
+                {
+                    writer.WriteStartElement("node");
+                    writer.WriteAttributeString("x", node.Location.X.ToString());
+                    writer.WriteAttributeString("y", node.Location.Y.ToString());
+                    writer.WriteEndElement();
+                }
                 writer.WriteEndElement();
+                writer.WriteStartElement("edges");
+                foreach (var edge in edges.Values)
+                {
+                    writer.WriteStartElement("edge");
+                    writer.WriteAttributeString("start", edge.StartNode.ToString());
+                    writer.WriteAttributeString("end", edge.EndNode.ToString());
+                    writer.WriteAttributeString("weight", edge.Weight.ToString());
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndDocument();
+                writer.Close();
             }
-            writer.WriteEndElement();
-            writer.WriteStartElement("edges");
-            foreach (var edge in edges.Values)
+            catch (Exception exc)
             {
-                writer.WriteStartElement("edge");
-                writer.WriteAttributeString("start", edge.StartNode.ToString());
-                writer.WriteAttributeString("end", edge.EndNode.ToString());
-                writer.WriteAttributeString("weight", edge.Weight.ToString());
-                writer.WriteEndElement();
+                var messageBox = new MessageForm("Hiba", "Hiba történt a mentés során " + exc.Message);
+                messageBox.ShowDialog(this);
             }
-            writer.WriteEndDocument();
-            writer.Close();
         }
 
         private void LoadFromFile(object sender, EventArgs e)
@@ -353,32 +361,41 @@ namespace GraphForm.View
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "xml files | *.xml";
             dialog.ShowDialog();
-            XmlReader reader = XmlReader.Create(dialog.FileName);
-            while (reader.Read())
+            try
             {
-                if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "graph"))
+                XmlReader reader = XmlReader.Create(dialog.FileName);
+                while (reader.Read())
                 {
-                    if (reader.GetAttribute("directed") == "true")
+                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "graph"))
                     {
-                        newDirected.PerformClick();
+                        if (reader.GetAttribute("directed") == "true")
+                        {
+                            newDirected.PerformClick();
+                        }
+                        else if (reader.GetAttribute("directed") == "false")
+                        {
+                            newUndirected.PerformClick();
+                        }
                     }
-                    else if (reader.GetAttribute("directed") == "false")
+
+                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "node"))
                     {
-                        newUndirected.PerformClick();
+                        _model.AddNode();
+                        nodes[nodes.Count - 1].Left = Convert.ToInt32(reader.GetAttribute("x"));
+                        nodes[nodes.Count - 1].Top = Convert.ToInt32(reader.GetAttribute("y"));
+                    }
+
+                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "edge"))
+                    {
+                        _model.AddEdge(Convert.ToInt32(reader.GetAttribute("start")),
+                            Convert.ToInt32(reader.GetAttribute("end")), Convert.ToDouble(reader.GetAttribute("weight")));
                     }
                 }
-
-                if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "node"))
-                {
-                    _model.AddNode();
-                    nodes[nodes.Count - 1].Left = Convert.ToInt32(reader.GetAttribute("x"));
-                    nodes[nodes.Count - 1].Top = Convert.ToInt32(reader.GetAttribute("y"));
-                }
-
-                if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "edge"))
-                {
-                    _model.AddEdge(Convert.ToInt32(reader.GetAttribute("start")), Convert.ToInt32(reader.GetAttribute("end")), Convert.ToDouble(reader.GetAttribute("weight")));
-                }
+            }
+            catch (Exception exc)
+            {
+                var messageBox = new MessageForm("Hiba", "Hiba történt a betöltés során " + exc.Message);
+                messageBox.ShowDialog(this);
             }
 
         }
