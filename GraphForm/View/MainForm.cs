@@ -325,14 +325,7 @@ namespace GraphForm.View
             XmlWriter writer = XmlWriter.Create(dialog.FileName);
             writer.WriteStartDocument();
             writer.WriteStartElement("graph");
-            if (_model.IsDirected)
-            {
-                writer.WriteAttributeString("directed", "true");
-            }
-            else
-            {
-                writer.WriteAttributeString("directed", "false");
-            }
+            writer.WriteAttributeString("directed", _model.IsDirected ? "true" : "false");
             writer.WriteStartElement("nodes");
             foreach (var node in nodes)
             {
