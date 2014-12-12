@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Xml;
 using GraphForm.Model;
 
 namespace GraphForm.View
@@ -23,6 +24,8 @@ namespace GraphForm.View
             SpeedBar.Value = 1000;
             newUndirected.Click += NewGraph;
             newDirected.Click += NewGraph;
+            SaveMenuItem.Click += SaveToFile;
+            LoadMenuItem.Click += LoadFromFile;
             addButton.Click += addNode;
             linebtn.Click += NewEdge;
             nodes = new List<NodeView>();
@@ -310,6 +313,81 @@ namespace GraphForm.View
             _isDragging = false;
             draggable.Capture = false;
             Refresh();
+        }
+
+        private void SaveToFile(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "xml files | *.xml";
+            dialog.DefaultExt = "txt";
+            dialog.ShowDialog();
+
+            XmlWriter writer = XmlWriter.Create(dialog.FileName);
+            writer.WriteStartDocument();
+            writer.WriteStartElement("graph");
+            if (_model.IsDirected)
+            {
+                writer.WriteAttributeString("directed", "true");
+            }
+            else
+            {
+                writer.WriteAttributeString("directed", "false");
+            }
+            writer.WriteStartElement("nodes");
+            foreach (var node in nodes)
+            {
+                writer.WriteStartElement("node");
+                writer.WriteAttributeString("x", node.Location.X.ToString());
+                writer.WriteAttributeString("y", node.Location.Y.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+            writer.WriteStartElement("edges");
+            foreach (var edge in edges.Values)
+            {
+                writer.WriteStartElement("edge");
+                writer.WriteAttributeString("start", edge.StartNode.ToString());
+                writer.WriteAttributeString("end", edge.EndNode.ToString());
+                writer.WriteAttributeString("weight", edge.Weight.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndDocument();
+            writer.Close();
+        }
+
+        private void LoadFromFile(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "xml files | *.xml";
+            dialog.ShowDialog();
+            XmlReader reader = XmlReader.Create(dialog.FileName);
+            while (reader.Read())
+            {
+                if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "graph"))
+                {
+                    if (reader.GetAttribute("directed") == "true")
+                    {
+                        newDirected.PerformClick();
+                    }
+                    else if (reader.GetAttribute("directed") == "false")
+                    {
+                        newUndirected.PerformClick();
+                    }
+                }
+
+                if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "node"))
+                {
+                    _model.AddNode();
+                    nodes[nodes.Count - 1].Left = Convert.ToInt32(reader.GetAttribute("x"));
+                    nodes[nodes.Count - 1].Top = Convert.ToInt32(reader.GetAttribute("y"));
+                }
+
+                if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "edge"))
+                {
+                    _model.AddEdge(Convert.ToInt32(reader.GetAttribute("start")), Convert.ToInt32(reader.GetAttribute("end")), Convert.ToDouble(reader.GetAttribute("weight")));
+                }
+            }
+
         }
     }
 }
