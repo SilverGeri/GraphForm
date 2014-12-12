@@ -76,7 +76,6 @@
     <Compile Include="View\NodeView.Designer.cs">
       <DependentUpon>NodeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SaveHelper.cs" />
     <Compile Include="View\TableForm.cs">
       <SubType>Form</SubType>
     </Compile>
