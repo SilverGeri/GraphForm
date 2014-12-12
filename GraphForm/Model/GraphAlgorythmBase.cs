@@ -103,7 +103,6 @@ namespace GraphForm.Model
             while (!End())
             {
                 Next();
-                //TODO : softcode the period
                 Thread.Sleep(timeOut);
             }
             IsRunning = false;
