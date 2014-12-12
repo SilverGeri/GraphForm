@@ -26,7 +26,7 @@ namespace GraphForm.View
             newDirected.Click += NewGraph;
             SaveMenuItem.Click += SaveToFile;
             LoadMenuItem.Click += LoadFromFile;
-            addButton.Click += addNode;
+            addButton.Click += AddNode;
             linebtn.Click += NewEdge;
             nodes = new List<NodeView>();
             edges = new Dictionary<int, Edge>();
@@ -75,7 +75,7 @@ namespace GraphForm.View
             _model.TableEvent += TableHandler;
             _model.NodeStateChangeEvent += NodeStateChanged;
             _model.EdgeStateChangeEvent += EdgeStateChanged;
-            _model.StartNodeChanged += startNodeChanged;
+            _model.StartNodeChanged += StartNodeChanged;
             
             foreach (NodeView node in nodes)
             {
@@ -162,7 +162,7 @@ namespace GraphForm.View
             }
         }
 
-        private void addNode(object sender, EventArgs e)
+        private void AddNode(object sender, EventArgs e)
         {
             _model.AddNode();
         }
@@ -190,7 +190,7 @@ namespace GraphForm.View
             Refresh();
         }
 
-        private void startNodeChanged(object sender, StartNodeChangeEventArgs e)
+        private void StartNodeChanged(object sender, StartNodeChangeEventArgs e)
         {
             if (e.PrevStartNode != null)
             {
