@@ -74,6 +74,7 @@ namespace GraphForm.Model
             _edgeId = 0;
             IsDirected = isDirected;
             graphList = new List<Node>();
+            _startNodeIndex = null;
         }
 
         public void AddNode()
