@@ -120,9 +120,9 @@ namespace GraphForm.Model
 
         private int FindMinIndex()
         {
-            var min = (double)tables[DISTANCE].Rows[tables[DISTANCE].Rows.Count - 1][0];
-            int retVal = _graph.FindIndex(x => x.State == NodeState.White);
-            for (int i = retVal + 1; i < tables[DISTANCE].Columns.Count; ++i)
+            var min = double.PositiveInfinity;
+            int retVal = -1;
+            for (int i = 0; i < tables[DISTANCE].Columns.Count; ++i)
             {
                 if (_graph[i].State == NodeState.White && (double)tables[DISTANCE].Rows[tables[DISTANCE].Rows.Count - 1][i] < min)
                 {

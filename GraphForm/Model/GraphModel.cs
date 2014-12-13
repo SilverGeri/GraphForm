@@ -102,7 +102,7 @@ namespace GraphForm.Model
                 error += "Hurokél nem támogatott!\n";
             }
 
-            if (graphList[startNode - 1].Edges.Any(x => x.EndNode == endNode - 1))
+            if (error == "" && graphList[startNode - 1].Edges.Any(x => x.EndNode == endNode - 1))
             {
                 error += "Többszörös élek nem támogatottak\n";
             }
