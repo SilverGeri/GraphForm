@@ -28,6 +28,7 @@ namespace GraphForm.Model
                 return;
             }
 
+            _stack.Clear();
             tables.Clear();
             tables.Add(DATA, new DataTable());
             tables[DATA].Columns.Add(new DataColumn("Csúcs", typeof(int)));
