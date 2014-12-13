@@ -7,10 +7,6 @@ namespace GraphForm.Model
     [Serializable]
     class DepthSearch : GraphAlgorythmBase
     {
-        //this algorythm is capable of decide whether the graph is cyclic or not
-        //note: the correct result is got when the algorythm ended
-        public bool IsCyclic { get; private set; }
-
         private int _startNodeIndex;
         private int _depth;
         private int _finish;
@@ -22,7 +18,6 @@ namespace GraphForm.Model
             _startNodeIndex = startNodeIndex;
             _depth = 1;
             _finish = 1;
-            IsCyclic = false;
             DATA = "data";
         }
         
@@ -86,11 +81,6 @@ namespace GraphForm.Model
                 ++_finish;
                 actnode.State = NodeState.Black;
                 RaiseNodeStateChangeEvent(actnode.Index, actnode.State);
-
-                if (actnode.Edges.FindIndex(x => _graph[x.EndNode].State == NodeState.Gray) != -1)
-                {
-                    IsCyclic = true;
-                }
             }
             else
             {
