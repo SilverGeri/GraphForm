@@ -25,6 +25,7 @@ namespace GraphForm.Model
                 return;
             }
 
+            _queue.Clear();
             tables.Clear();
             tables.Add(PARENT, new DataTable());
             tables.Add(DISTANCE, new DataTable());
