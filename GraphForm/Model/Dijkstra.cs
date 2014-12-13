@@ -12,10 +12,12 @@ namespace GraphForm.Model
         private List<Edge> _parentEdges;
         private readonly string PARENT;
         private readonly string DISTANCE;
+        private bool _end;
         public Dijkstra(ref List<Node> graph, int startNodeIndex) : base(ref graph)
         {
             _startNodeIndex = startNodeIndex;
             _parentEdges = new List<Edge>();
+            _end = false;
             PARENT = "parent";
             DISTANCE = "distance";
         }
@@ -57,6 +59,7 @@ namespace GraphForm.Model
             tables[DISTANCE].Rows[0][_startNodeIndex] = 0;
             RaiseTableEvent(PARENT, "Szülő");
             RaiseTableEvent(DISTANCE, "Távolság");
+            _end = false;
             IsInitalised = true;
         }
 
@@ -84,6 +87,11 @@ namespace GraphForm.Model
             }
 
             int actNodeIndex = FindMinIndex();
+            if (actNodeIndex == -1)
+            {
+                _end = true;
+                return;
+            }
             foreach (var edge in _graph[actNodeIndex].Edges)
             {
                 if (_graph[edge.EndNode].State == NodeState.White &&
@@ -115,7 +123,7 @@ namespace GraphForm.Model
 
         public override bool End()
         {
-            return _graph.All(x => x.State == NodeState.Black);
+            return _end;
         }
 
         private int FindMinIndex()
