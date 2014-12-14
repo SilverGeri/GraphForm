@@ -101,9 +101,10 @@ namespace GraphForm.Model
                     {
                         tables[REACH].Rows[i][j + 1] = "Hamis";
                     }
-                    RaiseTableEvent(REACH);
+                    
                 }
             }
+            RaiseTableEvent(REACH);
 
             ++k;
         }
