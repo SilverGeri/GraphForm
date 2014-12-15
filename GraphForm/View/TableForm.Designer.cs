@@ -42,6 +42,7 @@
             this.Table.Location = new System.Drawing.Point(0, 0);
             this.Table.Margin = new System.Windows.Forms.Padding(0);
             this.Table.Name = "Table";
+            this.Table.ReadOnly = true;
             this.Table.Size = new System.Drawing.Size(284, 261);
             this.Table.TabIndex = 0;
             // 
